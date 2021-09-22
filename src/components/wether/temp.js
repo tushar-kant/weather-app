@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Weathercard from './weathercard';
 
 
+
 const Temp = () => {
+   
     const [searchValue, setSearchValue] = useState("cuttack");
     const[tempInfo,setTempInfo]=useState({});
     const getWeatherInfo = async () => {
         try {
-            let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=0d84cd15a92a155b6690378d73611242`;
+            let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=${process.env.REACT_APP_UNSPLASE_KEY}`;
             const res = await fetch(url);
+            const PORT = process.env.PORT;
             const data = await res.json();
 
             const { temp, humidity, pressure } = data.main;
@@ -53,6 +56,7 @@ const Temp = () => {
                     <button className="searchButton" type="button" onClick={getWeatherInfo}>
                         Search
                     </button>
+                    
 
                 </div>
             </div>
